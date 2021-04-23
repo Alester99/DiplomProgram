@@ -250,8 +250,8 @@ print(melody)
 Notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
 count_of_frets = 25
 count_of_strings = 6
-d = 1
-e = 0.5
+d = 630
+e = 8
 
 def PrintMas(a):
     print()
@@ -303,7 +303,7 @@ def StringsFretsForNote (StringsFrets, ListOfNotes):
         for i in range(count_of_strings):
             for j in range(count_of_frets):
                 if ListOfNotes[k] == StringsFrets[i][j]: Note_S_F[k].append({'s':i,'f':j})#; print(i,j)
-    #PrintMas(Note_S_F)
+    PrintMas(Note_S_F)
     return Note_S_F
 
 Note_S_F = StringsFretsForNote (StringsFrets, ListOfNotes)
@@ -382,9 +382,9 @@ def ShowTabulature (FinalT,melody):
         for j in range (count_of_strings+1):
             if len(ShowT[block])-1 < j: ShowT[block].append('')
             if j == 0: 
-                if len(melody[i]) == 2: ShowT[block][j]=ShowT[block][j]+melody[i]+'..'
+                if len(melody[i]) == 2: ShowT[block][j]=ShowT[block][j]+'.'+melody[i]+'.'
                 else: ShowT[block][j]=ShowT[block][j]+melody[i]+'.'
-            elif j == FinalT[i].get('s'): 
+            elif j-1 == FinalT[i].get('s'): 
                 if len(melody[i]) == 1: ShowT[block][j]=ShowT[block][j]+'-'+str(FinalT[i].get('f'))+'--'
                 else: ShowT[block][j]=ShowT[block][j]+'-'+str(FinalT[i].get('f'))+'-'
             else:ShowT[block][j]=ShowT[block][j]+'----'
