@@ -374,3 +374,34 @@ def TabulatureToNotes (FinalT,StringsFrets,melody):
     if ShowNotes == melody: print ("ShowNotes == melody")
 TabulatureToNotes (FinalT,StringsFrets,melody)        
 
+def ShowTabulature (FinalT,melody):
+    totalLenOfBlock = 40; incrementForBlocks = totalLenOfBlock; lenOfBlock = 0; block = 0
+    ShowT = []
+    ShowT.append([])
+    for i in range (len(FinalT)):
+        for j in range (count_of_strings+1):
+            if len(ShowT[block])-1 < j: ShowT[block].append('')
+            if j == 0: 
+                if len(melody[i]) == 2: ShowT[block][j]=ShowT[block][j]+melody[i]+'..'
+                else: ShowT[block][j]=ShowT[block][j]+melody[i]+'.'
+            elif j == FinalT[i].get('s'): 
+                if len(melody[i]) == 1: ShowT[block][j]=ShowT[block][j]+'-'+str(FinalT[i].get('f'))+'--'
+                else: ShowT[block][j]=ShowT[block][j]+'-'+str(FinalT[i].get('f'))+'-'
+            else:ShowT[block][j]=ShowT[block][j]+'----'
+            #print(FinalT[i].get('s'),str(j))
+        if lenOfBlock == totalLenOfBlock: totalLenOfBlock += incrementForBlocks; block += 1;ShowT.append([])
+        lenOfBlock += 1
+    return ShowT
+ShowTabulature (FinalT,melody)
+
+ShowT = ShowTabulature (FinalT,melody)
+
+def PrintTabulature (ShowT):
+    for i in range (len(ShowT)):
+        print('='*40*4,'\n')
+        for j in range (len(ShowT[i])):
+            print(ShowT[i][j],'\n')
+        
+
+PrintTabulature (ShowT)
+
