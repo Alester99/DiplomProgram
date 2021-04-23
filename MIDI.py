@@ -250,8 +250,8 @@ print(melody)
 Notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
 count_of_frets = 25
 count_of_strings = 6
-d = 3
-e = 1
+d = 1
+e = 0.5
 
 def PrintMas(a):
     print()
@@ -348,7 +348,7 @@ def f (MelodyToTable):
     return F, F[len(F)-1].index(min(F[len(F)-1]))
 F, x = f (MelodyToTable)
 
-def tabulature (MelodyToTable,F):
+def Tabulature (MelodyToTable,F):
     T = []
     F = F[::-1];MelodyToTable=MelodyToTable[::-1]
     for i in range(len(F)):
@@ -362,7 +362,15 @@ def tabulature (MelodyToTable,F):
     for i in range (len(T)):
         FinalT.append(MelodyToTable[i][T[i]])
     print(FinalT)
+    return (FinalT)
 
-tabulature (MelodyToTable,F)
-        
+FinalT = Tabulature (MelodyToTable,F)
+def TabulatureToNotes (FinalT,StringsFrets,melody):
+    ShowNotes = []
+    PrintMas(StringsFrets)
+    for i in range(len(FinalT)):
+        ShowNotes.append(StringsFrets[FinalT[i].get('s')][FinalT[i].get('f')])
+    print (ShowNotes)
+    if ShowNotes == melody: print ("ShowNotes == melody")
+TabulatureToNotes (FinalT,StringsFrets,melody)        
 
